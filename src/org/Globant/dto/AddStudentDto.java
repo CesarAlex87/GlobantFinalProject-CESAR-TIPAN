@@ -1,11 +1,11 @@
-package org.Globant.domain;
+package org.Globant.dto;
 
-public class Student {
+public class AddStudentDto {
     private int studentId;
     private String name;
     private int age;
 
-    public Student(int studentId, String name, int age) {
+    public AddStudentDto(int studentId, String name, int age) {
         this.studentId = studentId;
         this.name = name;
         this.age = age;

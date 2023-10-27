@@ -1,11 +1,11 @@
-package org.Globant.domain;
+package org.Globant.dto;
 
-public class Teacher {
+public class AddTeacherDto {
     private String name;
     private double salary;
     private String contract;
 
-    public Teacher(String name, double salary, String contract) {
+    public AddTeacherDto(String name, double salary, String contract) {
         this.name = name;
         this.salary = salary;
         this.contract = contract;

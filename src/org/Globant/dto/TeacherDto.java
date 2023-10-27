@@ -1,14 +1,26 @@
-package org.Globant.domain;
+package org.Globant.dto;
 
-public class Teacher {
+public class TeacherDto {
+    private int id;
     private String name;
     private double salary;
     private String contract;
 
-    public Teacher(String name, double salary, String contract) {
+    public TeacherDto(){}
+
+    public TeacherDto(int id, String name, double salary, String contract) {
+        this.id = id;
         this.name = name;
         this.salary = salary;
         this.contract = contract;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -33,5 +45,10 @@ public class Teacher {
 
     public void setContract(String contract) {
         this.contract = contract;
+    }
+
+    @Override
+    public String toString() {
+        return "NAME: " + name + ", SALARY: " + salary + ", CONTRACT: " + contract;
     }
 }
