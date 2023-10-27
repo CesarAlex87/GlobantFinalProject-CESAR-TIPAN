@@ -1,13 +1,12 @@
 package org.Globant.domain;
 
-public class Student {
+public class Student extends Person{
     private int studentId;
-    private String name;
     private int age;
 
     public Student(int studentId, String name, int age) {
+        super(name);
         this.studentId = studentId;
-        this.name = name;
         this.age = age;
     }
 
@@ -17,14 +16,6 @@ public class Student {
 
     public void setStudentId(int studentId) {
         this.studentId = studentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getAge() {

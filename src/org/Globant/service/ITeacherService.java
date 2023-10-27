@@ -8,6 +8,6 @@ import java.util.List;
 public interface ITeacherService {
     TeacherDto addTeacher(AddTeacherDto addTeacherDto);
     TeacherDto getTeacher(int id);
-    List<TeacherDto> getTeacher();
+    List<TeacherDto> getTeachers();
     TeacherDto updateTeacher(int id, AddTeacherDto addTeacherDto);
 }

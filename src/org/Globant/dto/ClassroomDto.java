@@ -1,17 +1,14 @@
-package org.Globant.domain;
-import org.Globant.dto.StudentDto;
-import org.Globant.dto.TeacherDto;
+package org.Globant.dto;
 
 import java.util.ArrayList;
 
-public class Classroom {
+public class ClassroomDto {
     private String name;
     private String classNumber;
     private ArrayList<StudentDto> classStudents;
     private TeacherDto teacher;
 
-
-    public Classroom(String name, String classNumber, ArrayList<StudentDto> classStudents, TeacherDto teacher) {
+    public ClassroomDto(String name, String classNumber, ArrayList<StudentDto> classStudents, TeacherDto teacher) {
         this.name = name;
         this.classNumber = classNumber;
         this.classStudents = classStudents;
@@ -48,5 +45,12 @@ public class Classroom {
 
     public void setTeacher(TeacherDto teacher) {
         this.teacher = teacher;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n====================================================\n" +
+                "CLASS NAME: " + name + " , CLASS NUMBER: " + classNumber + "\n[STUDENTS]: " + classStudents + "\n[TEACHER]: " + teacher.getName() +
+                "\n====================================================\n\n";
     }
 }

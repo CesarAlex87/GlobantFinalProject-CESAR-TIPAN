@@ -6,11 +6,11 @@ import org.Globant.dto.StudentDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class StudentService implements IStudentService{
     private final List<Student> students = new ArrayList<>();
     private int currentStudentId = 100001;
-    private int id = 1;
 
     public StudentService() {
         students.add(new Student(getNextStudentId(), "Juan Carlos Pérez", 28));
@@ -25,25 +25,32 @@ public class StudentService implements IStudentService{
         return currentStudentId++;
     }
 
-    private int getNextId() { return id++; }
-
     @Override
     public StudentDto addStudent(AddStudentDto addStudentDto) {
         var student = new Student(this.getNextStudentId(), addStudentDto.getName(), addStudentDto.getAge());
         students.add(student);
 
-        return new StudentDto(1, student.getStudentId(), student.getName(), student.getAge());
+        return new StudentDto(student.getStudentId(), student.getName(), student.getAge());
     }
 
     @Override
-    public StudentDto getStudent(int id) {
-        return null;
+    public StudentDto getStudentByStudentId(int studentId) {
+        Student student = students.stream()
+                .filter(s -> s.getStudentId() == studentId)
+                .findFirst()
+                .orElse(null);
+
+        if (student != null) {
+            return new StudentDto(student.getStudentId(), student.getName(), student.getStudentId());
+        } else {
+            throw new NoSuchElementException("Student doesn't exist or not found: " + studentId );
+        }
     }
 
     @Override
     public List<StudentDto> getStudents() {
         return students.stream()
-                .map(student -> new StudentDto(1, student.getStudentId(), student.getName(), student.getAge()))
+                .map(student -> new StudentDto(student.getStudentId(), student.getName(), student.getAge()))
                 .toList();
     }
 

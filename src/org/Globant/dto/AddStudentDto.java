@@ -1,22 +1,12 @@
 package org.Globant.dto;
 
 public class AddStudentDto {
-    private int studentId;
     private String name;
     private int age;
 
-    public AddStudentDto(int studentId, String name, int age) {
-        this.studentId = studentId;
+    public AddStudentDto(String name, int age) {
         this.name = name;
         this.age = age;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
     }
 
     public String getName() {

@@ -6,33 +6,50 @@ import org.Globant.dto.TeacherDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class TeacherService implements ITeacherService{
     private final List<Teacher> teachers = new ArrayList<>();
     private int currentId = 1;
 
     public TeacherService(){
-        this.addTeacher(new AddTeacherDto());
+        teachers.add(new Teacher(getNextId() ,"Ing. Bryan Lopez", 1000, true));
+        teachers.add(new Teacher(getNextId(), "Ing. Adrian Gonzales", 200, false));
     }
 
     private int getNextId(){ return currentId++; }
 
+    private Teacher findTeacherById(int id) {
+        return teachers.stream()
+                .filter(teacher -> teacher.getTeacherId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
     @Override
     public TeacherDto addTeacher(AddTeacherDto addTeacherDto) {
-        var teacher = new Teacher(addTeacherDto.getName(), addTeacherDto.getSalary(), addTeacherDto.getContract());
+        var teacher = new Teacher(getNextId(), addTeacherDto.getName(), addTeacherDto.getSalary(), addTeacherDto.isPartialTime());
         teachers.add(teacher);
 
-        return new TeacherDto(this.getNextId(), teacher.getName(), teacher.getSalary(), teacher.getContract());
+        return new TeacherDto(teacher.getTeacherId(), teacher.getName(), teacher.getSalary(), teacher.isPartialTime());
     }
 
     @Override
     public TeacherDto getTeacher(int id) {
-        return null;
+        Teacher teacher = findTeacherById(id);
+
+        if (teacher != null) {
+            return new TeacherDto(teacher.getTeacherId(), teacher.getName(), teacher.getSalary(), teacher.isPartialTime());
+        } else {
+            throw new NoSuchElementException("Teacher not found or doesn't exist for ID: " + id);
+        }
     }
 
     @Override
-    public List<TeacherDto> getTeacher() {
-        return null;
+    public List<TeacherDto> getTeachers() {
+        return teachers.stream()
+                .map(teacher -> new TeacherDto(teacher.getTeacherId(), teacher.getName(), teacher.getSalary(), teacher.isPartialTime()))
+                .toList();
     }
 
     @Override

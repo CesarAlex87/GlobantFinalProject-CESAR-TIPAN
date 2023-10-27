@@ -1,22 +1,13 @@
 package org.Globant.dto;
 
-public class AddTeacherDto {
-    private String name;
+public class AddTeacherDto extends AddPersonDto{
     private double salary;
-    private String contract;
+    private boolean isPartialTime;
 
-    public AddTeacherDto(String name, double salary, String contract) {
-        this.name = name;
+    public AddTeacherDto(String name, double salary, boolean isPartialTime) {
+        super(name);
         this.salary = salary;
-        this.contract = contract;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.isPartialTime = isPartialTime;
     }
 
     public double getSalary() {
@@ -27,11 +18,11 @@ public class AddTeacherDto {
         this.salary = salary;
     }
 
-    public String getContract() {
-        return contract;
+    public boolean isPartialTime() {
+        return isPartialTime;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setPartialTime(boolean isPartialTime) {
+        this.isPartialTime = isPartialTime;
     }
 }

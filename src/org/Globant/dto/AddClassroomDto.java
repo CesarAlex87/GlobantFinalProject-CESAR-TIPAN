@@ -1,17 +1,17 @@
-package org.Globant.domain;
-import org.Globant.dto.StudentDto;
-import org.Globant.dto.TeacherDto;
+package org.Globant.dto;
+
+import org.Globant.domain.Student;
+import org.Globant.domain.Teacher;
 
 import java.util.ArrayList;
 
-public class Classroom {
+public class AddClassroomDto {
     private String name;
     private String classNumber;
     private ArrayList<StudentDto> classStudents;
     private TeacherDto teacher;
 
-
-    public Classroom(String name, String classNumber, ArrayList<StudentDto> classStudents, TeacherDto teacher) {
+    public AddClassroomDto(String name, String classNumber, ArrayList<StudentDto> classStudents, TeacherDto teacher) {
         this.name = name;
         this.classNumber = classNumber;
         this.classStudents = classStudents;

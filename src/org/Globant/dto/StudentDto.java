@@ -1,26 +1,16 @@
 package org.Globant.dto;
 
 public class StudentDto {
-    private int id;
     private int studentId;
     private String name;
     private int age;
 
     public StudentDto(){}
 
-    public StudentDto(int id, int studentId, String name, int age) {
-        this.id = id;
+    public StudentDto( int studentId, String name, int age) {
         this.studentId = studentId;
         this.name = name;
         this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getStudentId() {
@@ -49,6 +39,6 @@ public class StudentDto {
 
     @Override
     public String toString() {
-        return "NAME: " + name + ", AGE: " + age;
+        return "STUDENT ID: " + studentId + ", NAME: " + name + ", AGE: " + age;
     }
 }

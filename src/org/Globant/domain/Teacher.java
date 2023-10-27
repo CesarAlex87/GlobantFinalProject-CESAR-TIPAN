@@ -1,22 +1,23 @@
 package org.Globant.domain;
 
-public class Teacher {
-    private String name;
+public class Teacher extends Person{
+    private int teacherId;
     private double salary;
-    private String contract;
+    private boolean isPartialTime;
 
-    public Teacher(String name, double salary, String contract) {
-        this.name = name;
+    public Teacher(int teacherId , String name, double salary, boolean isPartialTime) {
+        super(name);
+        this.teacherId = teacherId;
         this.salary = salary;
-        this.contract = contract;
+        this.isPartialTime = isPartialTime;
     }
 
-    public String getName() {
-        return name;
+    public int getTeacherId() {
+        return teacherId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
     public double getSalary() {
@@ -27,11 +28,11 @@ public class Teacher {
         this.salary = salary;
     }
 
-    public String getContract() {
-        return contract;
+    public boolean isPartialTime() {
+        return isPartialTime;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setPartialTime(boolean partialTime) {
+        isPartialTime = partialTime;
     }
 }
