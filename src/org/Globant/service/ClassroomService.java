@@ -18,6 +18,22 @@ public class ClassroomService implements IClassroomService{
     }
 
     @Override
+    public List<ClassroomDto> getAllClassroomsByStudent(StudentDto studentSearched) {
+        List<ClassroomDto> classroomsWithStudent = new ArrayList<>();
+
+        for (Classroom classroom : classrooms) {
+            ArrayList<StudentDto> classStudents = classroom.getClassStudents();
+            if (classStudents.stream().anyMatch(student -> student.equals(studentSearched))) {
+                ClassroomDto classroomDto = new ClassroomDto(classroom.getName(), classroom.getClassNumber(), classStudents, classroom.getTeacher());
+                classroomsWithStudent.add(classroomDto);
+            }
+        }
+
+        return classroomsWithStudent;
+    }
+
+
+    @Override
     public void addStudentToClassroom(StudentDto studentToAdd, String classNumber) {
         if (studentToAdd != null) {
             Classroom classroom = findClassroomByClassNumber(classNumber);

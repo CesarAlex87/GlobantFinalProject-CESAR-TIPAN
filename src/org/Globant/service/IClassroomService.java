@@ -12,4 +12,5 @@ public interface IClassroomService {
     List<ClassroomDto> getClassrooms();
     ClassroomDto updateClassroom(String classNumber, AddClassroomDto addClassroomDto);
     void addStudentToClassroom(StudentDto studentToAdd, String classNumber);
+    List<ClassroomDto> getAllClassroomsByStudent(StudentDto studentByStudentId);
 }

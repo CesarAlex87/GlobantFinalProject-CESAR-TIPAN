@@ -1,8 +1,10 @@
 package org.Globant.ui;
 
+import org.Globant.domain.Classroom;
 import org.Globant.domain.Student;
 import org.Globant.dto.AddClassroomDto;
 import org.Globant.dto.AddStudentDto;
+import org.Globant.dto.ClassroomDto;
 import org.Globant.dto.StudentDto;
 import org.Globant.service.IClassroomService;
 import org.Globant.service.IStudentService;
@@ -41,7 +43,7 @@ public class UI {
                     this.listTeachers();
                     break;
                 case 2:
-                    this.listClassrooms();
+                    this.ListClassroomsWithDescription();
                     break;
                 case 3:
                     this.createStudent();
@@ -50,6 +52,7 @@ public class UI {
                     createClassroom();
                     break;
                 case 5:
+                    listClassroomsForOneStudent();
                     break;
                 case 6:
                     option = 0;
@@ -59,6 +62,21 @@ public class UI {
                     break;
             }
         }while(option!=0);
+    }
+
+    private void listClassroomsForOneStudent(){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Insert the Student ID: ");
+
+        List<ClassroomDto> classroomsList = classroomService.getAllClassroomsByStudent(
+                studentService.getStudentByStudentId(
+                        reader.nextInt()
+                )
+        );
+
+        classroomsList.forEach(classroom -> {
+            System.out.println("CLASS NAME: " + classroom.getName() + " , CLASS NUMBER: " + classroom.getClassNumber());
+        });
     }
 
     private void createStudent() {
@@ -156,6 +174,12 @@ public class UI {
     }
 
     private void listClassrooms(){
+        this.classroomService.getClassrooms().forEach(classroom -> {
+            System.out.println("CLASS NAME: " + classroom.getName() + " , CLASS NUMBER: " + classroom.getClassNumber());
+        });
+    }
+
+    private void ListClassroomsWithDescription(){
         var sc = new Scanner(System.in);
         int option;
         var reader = new Scanner(System.in);
