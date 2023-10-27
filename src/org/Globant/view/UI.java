@@ -1,4 +1,4 @@
-package org.Globant.ui;
+package org.Globant.view;
 
 
 import java.util.Scanner;
