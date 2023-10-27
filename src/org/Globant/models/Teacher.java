@@ -1,4 +1,4 @@
-package org.Globant.domain;
+package org.Globant.models;
 
 public class Teacher {
     private String name;

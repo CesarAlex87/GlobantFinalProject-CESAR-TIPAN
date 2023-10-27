@@ -1,4 +1,4 @@
-package org.Globant.domain;
+package org.Globant.models;
 import java.util.ArrayList;
 
 public class Classroom {

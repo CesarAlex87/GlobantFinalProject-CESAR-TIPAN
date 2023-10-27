@@ -1,8 +1,9 @@
-package org.Globant.domain;
+package org.Globant.models;
 
 public class Student {
+    private int StudentId;
     private String name;
-    private int id;
     private int age;
+
 
 }
