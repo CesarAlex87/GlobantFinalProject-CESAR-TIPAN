@@ -22,15 +22,22 @@ public class ClassroomService implements IClassroomService{
         List<ClassroomDto> classroomsWithStudent = new ArrayList<>();
 
         for (Classroom classroom : classrooms) {
-            ArrayList<StudentDto> classStudents = classroom.getClassStudents();
-            if (classStudents.stream().anyMatch(student -> student.equals(studentSearched))) {
-                ClassroomDto classroomDto = new ClassroomDto(classroom.getName(), classroom.getClassNumber(), classStudents, classroom.getTeacher());
-                classroomsWithStudent.add(classroomDto);
+            for (StudentDto student : classroom.getClassStudents()) {
+                if (student.getStudentId() == studentSearched.getStudentId()) {
+                    classroomsWithStudent.add(new ClassroomDto(
+                            classroom.getName(),
+                            classroom.getClassNumber(),
+                            classroom.getClassStudents(),
+                            classroom.getTeacher()
+                    ));
+                    break;
+                }
             }
         }
 
         return classroomsWithStudent;
     }
+
 
 
     @Override

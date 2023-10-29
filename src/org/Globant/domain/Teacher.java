@@ -5,8 +5,8 @@ public class Teacher extends Person{
     private double salary;
     private boolean isPartialTime;
 
-    public Teacher(int teacherId , String name, double salary, boolean isPartialTime) {
-        super(name);
+    public Teacher(int id, int teacherId , String name, double salary, boolean isPartialTime) {
+        super(id, name);
         this.teacherId = teacherId;
         this.salary = salary;
         this.isPartialTime = isPartialTime;

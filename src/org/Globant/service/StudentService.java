@@ -11,23 +11,26 @@ import java.util.NoSuchElementException;
 public class StudentService implements IStudentService{
     private final List<Student> students = new ArrayList<>();
     private int currentStudentId = 100001;
+    private int currentId = 1;
 
     public StudentService() {
-        students.add(new Student(getNextStudentId(), "Juan Carlos Pérez", 28));
-        students.add(new Student(getNextStudentId(), "María Isabel Rodríguez", 22));
-        students.add(new Student(getNextStudentId(), "Pedro Luis Martínez", 24));
-        students.add(new Student(getNextStudentId(), "Laura Elena Sánchez", 20));
-        students.add(new Student(getNextStudentId(), "Andrés Antonio González", 26));
-        students.add(new Student(getNextStudentId(), "Carmen Rosa López", 25));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Juan Carlos Pérez", 28));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "María Isabel Rodríguez", 22));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Pedro Luis Martínez", 24));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Laura Elena Sánchez", 20));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Andrés Antonio González", 26));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Carmen Rosa López", 25));
     }
 
     private int getNextStudentId() {
         return currentStudentId++;
     }
 
+    private int getNextCurrentId(){ return currentId++; }
+
     @Override
     public StudentDto addStudent(AddStudentDto addStudentDto) {
-        var student = new Student(this.getNextStudentId(), addStudentDto.getName(), addStudentDto.getAge());
+        var student = new Student(this.getNextCurrentId(), this.getNextStudentId(), addStudentDto.getName(), addStudentDto.getAge());
         students.add(student);
 
         return new StudentDto(student.getStudentId(), student.getName(), student.getAge());

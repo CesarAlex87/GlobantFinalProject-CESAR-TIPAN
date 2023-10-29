@@ -10,12 +10,15 @@ import java.util.NoSuchElementException;
 
 public class TeacherService implements ITeacherService{
     private final List<Teacher> teachers = new ArrayList<>();
+    private int currentTeacherId = 101;
     private int currentId = 1;
 
     public TeacherService(){
-        teachers.add(new Teacher(getNextId() ,"Ing. Bryan Lopez", 1000, true));
-        teachers.add(new Teacher(getNextId(), "Ing. Adrian Gonzales", 200, false));
+        teachers.add(new Teacher(getNextTeacherId(), getNextId() ,"Ing. Bryan Lopez", 1000, true));
+        teachers.add(new Teacher(getNextTeacherId(), getNextId(), "Ing. Adrian Gonzales", 200, false));
     }
+
+    private int getNextTeacherId() { return currentTeacherId++; }
 
     private int getNextId(){ return currentId++; }
 
@@ -28,7 +31,7 @@ public class TeacherService implements ITeacherService{
 
     @Override
     public TeacherDto addTeacher(AddTeacherDto addTeacherDto) {
-        var teacher = new Teacher(getNextId(), addTeacherDto.getName(), addTeacherDto.getSalary(), addTeacherDto.isPartialTime());
+        var teacher = new Teacher(this.getNextId(), this.currentTeacherId, addTeacherDto.getName(), addTeacherDto.getSalary(), addTeacherDto.isPartialTime());
         teachers.add(teacher);
 
         return new TeacherDto(teacher.getTeacherId(), teacher.getName(), teacher.getSalary(), teacher.isPartialTime());

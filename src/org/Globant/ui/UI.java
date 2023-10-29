@@ -1,28 +1,20 @@
 package org.Globant.ui;
 
-import org.Globant.domain.Classroom;
-import org.Globant.domain.Student;
 import org.Globant.dto.AddClassroomDto;
 import org.Globant.dto.AddStudentDto;
 import org.Globant.dto.ClassroomDto;
 import org.Globant.dto.StudentDto;
-import org.Globant.service.IClassroomService;
-import org.Globant.service.IStudentService;
-import org.Globant.service.ITeacherService;
+import org.Globant.service.UniversityService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UI {
-    private final IStudentService studentService;
-    private final ITeacherService teacherService;
-    private final IClassroomService classroomService;
+    private final UniversityService uS;
 
-    public UI(IStudentService studentService, ITeacherService teacherService, IClassroomService classroomService) {
-        this.studentService = studentService;
-        this.teacherService = teacherService;
-        this.classroomService = classroomService;
+    public UI(UniversityService universityService) {
+        this.uS = universityService;
     }
 
     public void menu(){
@@ -67,15 +59,16 @@ public class UI {
     private void listClassroomsForOneStudent(){
         Scanner reader = new Scanner(System.in);
         System.out.println("Insert the Student ID: ");
+        var idSearched = reader.nextInt();
 
-        List<ClassroomDto> classroomsList = classroomService.getAllClassroomsByStudent(
-                studentService.getStudentByStudentId(
-                        reader.nextInt()
-                )
-        );
+        var studentSearched = uS.getStudentS().getStudentByStudentId(idSearched);
+        System.out.println("\nThe Student: " + studentSearched.getName() + ", \nwith ID: " + studentSearched.getStudentId() + " is in this classrooms: \n\n");
 
-        classroomsList.forEach(classroom -> {
-            System.out.println("CLASS NAME: " + classroom.getName() + " , CLASS NUMBER: " + classroom.getClassNumber());
+        var studentClassrooms = uS.getClassroomS().getAllClassroomsByStudent(studentSearched);
+        System.out.println("--CLASSROOMS--");
+
+        studentClassrooms.forEach(classroom -> {
+            System.out.println(classroom.toString());
         });
     }
 
@@ -89,14 +82,14 @@ public class UI {
         var age = reader.nextInt();
         reader.nextLine();
         var addStudentDto = new AddStudentDto(name, age);
-        var studentToAdd = studentService.addStudent(addStudentDto);
+        var studentToAdd = uS.getStudentS().addStudent(addStudentDto);
 
         System.out.println("Please select the class from the list below for this student.");
         listClassrooms();
         System.out.println("\nEnter the class number: ");
         var classNumber = reader.nextLine();
 
-        classroomService.addStudentToClassroom(studentToAdd, classNumber);
+        uS.getClassroomS().addStudentToClassroom(studentToAdd, classNumber);
     }
 
     private void createClassroom() {
@@ -116,10 +109,10 @@ public class UI {
 
             System.out.println("Enter the teacher's [id]: ");
             var teacherId = reader.nextInt();
-            var teacherSelected = teacherService.getTeacher(teacherId);
+            var teacherSelected = uS.getTeacherS().getTeacher(teacherId);
 
             System.out.println("Select from the following list all the students you want to add to the classroom");
-            auxiliarList = new ArrayList<>(studentService.getStudents());
+            auxiliarList = new ArrayList<>(uS.getStudentS().getStudents());
 
             var flag = 1;
             do {
@@ -156,25 +149,25 @@ public class UI {
 
             }while(flag!=0);
 
-            classroomService.addClassroom(new AddClassroomDto(name, classNumber, studentsClassList, teacherSelected));
+            uS.getClassroomS().addClassroom(new AddClassroomDto(name, classNumber, studentsClassList, teacherSelected));
             System.out.println("Classroom created successfully, going back to main menu");
     }
 
     private void listStudents(){
-        this.studentService.getStudents().forEach(student -> {
+        this.uS.getStudentS().getStudents().forEach(student -> {
             System.out.println("[" + student.getStudentId() + "] " + student.toString());
         });
     }
 
     private void listTeachers() {
         System.out.println("--TEACHERS LIST--\n");
-        this.teacherService.getTeachers().forEach(teacher -> {
+        this.uS.getTeacherS().getTeachers().forEach(teacher -> {
             System.out.println("[" + teacher.getId() + "] " + teacher.toString());
         });
     }
 
     private void listClassrooms(){
-        this.classroomService.getClassrooms().forEach(classroom -> {
+        this.uS.getClassroomS().getClassrooms().forEach(classroom -> {
             System.out.println("CLASS NAME: " + classroom.getName() + " , CLASS NUMBER: " + classroom.getClassNumber());
         });
     }
@@ -185,7 +178,7 @@ public class UI {
         var reader = new Scanner(System.in);
 
         System.out.println("\n--CLASSROOMS LIST--\n");
-        this.classroomService.getClassrooms().forEach(classroom -> {
+        this.uS.getClassroomS().getClassrooms().forEach(classroom -> {
             System.out.println("CLASS NAME: " + classroom.getName() + " , CLASS NUMBER: " + classroom.getClassNumber());
         });
         do {
@@ -195,7 +188,7 @@ public class UI {
                 case 1:
                     System.out.println("Enter the class number: ");
                     var classNumber = reader.nextLine();
-                    System.out.println((classroomService.getClassroom(classNumber)).toString());
+                    System.out.println((uS.getClassroomS().getClassroom(classNumber)).toString());
                     break;
                 case 2:
                     option = 0;
