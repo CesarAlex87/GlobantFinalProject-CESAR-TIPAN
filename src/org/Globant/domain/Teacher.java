@@ -4,6 +4,8 @@ public class Teacher extends Person{
     private int teacherId;
     private double salary;
     private boolean isPartialTime;
+    private int yearsOfExperience;
+    private int activeHoursPerWeek;
 
     public Teacher(int id, int teacherId , String name, double salary, boolean isPartialTime) {
         super(id, name);

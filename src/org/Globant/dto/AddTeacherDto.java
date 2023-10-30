@@ -3,11 +3,14 @@ package org.Globant.dto;
 public class AddTeacherDto extends AddPersonDto{
     private double salary;
     private boolean isPartialTime;
+    private int yearsOfExperience;
+    private int activeHoursPerWeek;
 
     public AddTeacherDto(String name, double salary, boolean isPartialTime) {
         super(name);
         this.salary = salary;
         this.isPartialTime = isPartialTime;
+
     }
 
     public double getSalary() {

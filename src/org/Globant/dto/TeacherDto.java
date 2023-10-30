@@ -6,7 +6,8 @@ public class TeacherDto extends PersonDto {
     private int id;
     private double salary;
     private boolean isPartialTime;
-    public int yearsOfExperience;
+    private int yearsOfExperience;
+    private int activeHoursPerWeek;
 
     public TeacherDto(){}
 
@@ -16,6 +17,15 @@ public class TeacherDto extends PersonDto {
         this.salary = AppConstants.BASIC_SALARY;
         this.isPartialTime = isPartialTime;
         this.yearsOfExperience = 0;
+    }
+
+    public TeacherDto(int id, String name, double salary, boolean isPartialTime, int activeHoursPerWeek) {
+        super(name);
+        this.id = id;
+        this.salary = AppConstants.BASIC_SALARY;
+        this.isPartialTime = isPartialTime;
+        this.yearsOfExperience = 0;
+        this.activeHoursPerWeek = activeHoursPerWeek;
     }
 
     public int getId() {
@@ -46,12 +56,25 @@ public class TeacherDto extends PersonDto {
         return yearsOfExperience;
     }
 
+    public int getActiveHoursPerWeek() {
+        return activeHoursPerWeek;
+    }
+
+    public void setActiveHoursPerWeek(int activeHoursPerWeek) {
+        this.activeHoursPerWeek = activeHoursPerWeek;
+    }
+
     public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
-        if(yearsOfExperience!=0){
-            setSalary(AppConstants.BASIC_SALARY * (1.1 * yearsOfExperience));
+        if (yearsOfExperience != 0) {
+            if (!isPartialTime) {
+                setSalary(AppConstants.BASIC_SALARY * (1.1 * yearsOfExperience));
+            } else {
+                setSalary(AppConstants.BASIC_SALARY * getActiveHoursPerWeek());
+            }
         }
     }
+
 
     @Override
     public String toString() {

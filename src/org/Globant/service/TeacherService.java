@@ -14,8 +14,8 @@ public class TeacherService implements ITeacherService{
     private int currentId = 1;
 
     public TeacherService(){
-        teachers.add(new Teacher(getNextTeacherId(), getNextId() ,"Ing. Bryan Lopez", 1000, true));
-        teachers.add(new Teacher(getNextTeacherId(), getNextId(), "Ing. Adrian Gonzales", 200, false));
+        teachers.add(new Teacher(getNextTeacherId(), getNextId() ,"Ing. Bryan Lopez", 0, true));
+        teachers.add(new Teacher(getNextTeacherId(), getNextId(), "Ing. Adrian Gonzales", 0, false));
     }
 
     private int getNextTeacherId() { return currentTeacherId++; }
