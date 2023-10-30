@@ -11,10 +11,7 @@ public class ClassroomService implements IClassroomService{
     private final List<Classroom> classrooms = new ArrayList<>();
 
     public ClassroomService() {
-        classrooms.add(new Classroom("CALCULO INTEGRAL", "101", new ArrayList<StudentDto>(), new TeacherDto()));
-        classrooms.add(new Classroom("POO", "102", new ArrayList<StudentDto>(), new TeacherDto()));
-        classrooms.add(new Classroom("ESTADISTICA", "103", new ArrayList<StudentDto>(), new TeacherDto()));
-        classrooms.add(new Classroom("BASE DE DATOS", "104", new ArrayList<StudentDto>(), new TeacherDto()));
+        initClassrooms();
     }
 
     @Override
@@ -34,11 +31,8 @@ public class ClassroomService implements IClassroomService{
                 }
             }
         }
-
         return classroomsWithStudent;
     }
-
-
 
     @Override
     public void addStudentToClassroom(StudentDto studentToAdd, String classNumber) {
@@ -73,7 +67,6 @@ public class ClassroomService implements IClassroomService{
         return new ClassroomDto(classroom.getName(), classroom.getClassNumber(), classroom.getClassStudents(), classroom.getTeacher());
     }
 
-
     @Override
     public ClassroomDto getClassroom(String classNumber) {
         Classroom classroom = findClassroomByClassNumber(classNumber);
@@ -106,4 +99,18 @@ public class ClassroomService implements IClassroomService{
             throw new NoSuchElementException("Classroom not found or doesn't exist: " + classNumber);
         }
     }
+
+    private void initClassrooms() {
+        classrooms.add(new Classroom("FÍSICA", "201", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("PROGRAMACIÓN AVANZADA", "202", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("INTELIGENCIA ARTIFICIAL", "203", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("QUÍMICA ORGÁNICA", "204", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("ECONOMÍA MICROECONÓMICA", "205", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("DISEÑO GRÁFICO", "206", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("MATEMÁTICAS DISCRETAS", "207", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("ADMINISTRACIÓN DE EMPRESAS", "208", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("PROGRAMACIÓN WEB", "209", new ArrayList<StudentDto>(), new TeacherDto()));
+        classrooms.add(new Classroom("HISTORIA DEL ARTE", "210", new ArrayList<StudentDto>(), new TeacherDto()));
+    }
+
 }

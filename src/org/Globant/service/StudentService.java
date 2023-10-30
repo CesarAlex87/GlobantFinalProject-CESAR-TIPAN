@@ -14,12 +14,7 @@ public class StudentService implements IStudentService{
     private int currentId = 1;
 
     public StudentService() {
-        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Juan Carlos Pérez", 28));
-        students.add(new Student(getNextCurrentId(), getNextStudentId(), "María Isabel Rodríguez", 22));
-        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Pedro Luis Martínez", 24));
-        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Laura Elena Sánchez", 20));
-        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Andrés Antonio González", 26));
-        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Carmen Rosa López", 25));
+        initStudents();
     }
 
     private int getNextStudentId() {
@@ -61,4 +56,28 @@ public class StudentService implements IStudentService{
     public StudentDto updateStudent(int id, AddStudentDto addStudentDto) {
         return null;
     }
+
+    private void initStudents() {
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Carlos Alberto Gómez", 21));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Luisa Fernanda Vargas", 23));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Javier Alejandro Ramírez", 19));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Ana María Torres", 27));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Roberto Carlos López", 22));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Daniela González", 24));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Miguel Ángel Fernández", 28));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Elena Martínez", 20));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "José Luis Pérez", 26));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Sofía Ramírez", 25));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Diego Sánchez", 21));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Valentina Gómez", 22));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Carlos López", 23));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Isabel Vargas", 24));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Luis Martínez", 25));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "María González", 26));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Pablo Rodríguez", 27));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Lorena Sánchez", 28));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Andrea López", 29));
+        students.add(new Student(getNextCurrentId(), getNextStudentId(), "Ricardo Pérez", 30));
+    }
+
 }
